@@ -27,12 +27,7 @@ import jakarta.validation.constraints.NotBlank;
  * @author Oliver Drotbohm
  * @see GuestbookController#addEntry(GuestbookForm, org.springframework.validation.Errors, org.springframework.ui.Model)
  */
-class GuestbookForm {
-
-	private final @NotBlank String name;
-	private final @NotBlank String text;
-
-	private final @NotBlank String email;
+record GuestbookForm(@NotBlank String name, @NotBlank String text, @NotBlank String email) {
 
 	/**
 	 * Creates a new {@link GuestbookForm} with the given name and text. Spring Framework will use this constructor to
@@ -44,7 +39,7 @@ class GuestbookForm {
 	 * @param name the value to bind to {@code name}
 	 * @param text the value to bind to {@code text}
 	 */
-	public GuestbookForm(String name, String text,String email) {
+	GuestbookForm(String name, String text, String email) {
 
 		this.name = name;
 		this.text = text;
@@ -58,7 +53,8 @@ class GuestbookForm {
 	 *
 	 * @return the value bound to {@code name}
 	 */
-	public String getName() {
+	@Override
+	public String name() {
 		return name;
 	}
 
@@ -69,11 +65,13 @@ class GuestbookForm {
 	 *
 	 * @return the value bound to {@code text}
 	 */
-	public String getText() {
+	@Override
+	public String text() {
 		return text;
 	}
 
-	public String getEmail() {
+	@Override
+	public String email() {
 		return email;
 	}
 
@@ -84,6 +82,6 @@ class GuestbookForm {
 	 * @throws IllegalArgumentException if you call this on an instance without the name and text actually set.
 	 */
 	GuestbookEntry toNewEntry() {
-		return new GuestbookEntry(getName(), getText(),getEmail());
+		return new GuestbookEntry(name(), text(), email());
 	}
 }

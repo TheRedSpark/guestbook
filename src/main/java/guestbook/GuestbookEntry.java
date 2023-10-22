@@ -30,6 +30,9 @@ import org.springframework.util.Assert;
  * @author Oliver Drotbohm
  * @see https://en.wikipedia.org/wiki/Domain-driven_design#Building_blocks
  */
+
+
+
 @Entity
 class GuestbookEntry {
 	private @Id @GeneratedValue Long id;
@@ -41,7 +44,9 @@ class GuestbookEntry {
 	 *
 	 * @param name must not be {@literal null} or empty
 	 * @param text must not be {@literal null} or empty
+	 * @param email must not be {@literal null} or empty
 	 */
+
 	public GuestbookEntry(String name, String text,String email) {
 
 		Assert.hasText(name, "Name must not be null or empty!");
